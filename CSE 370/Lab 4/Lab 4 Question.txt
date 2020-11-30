@@ -1,0 +1,21 @@
+You are tasked with building the queries to retrieve the following information:
+
+1. Find the employee_id, last_name, email, salary and department_id of all the employees with the highest salary in each department.
+
+2. Find the employee_id, last_name, email, commission_pct and department_id of all the employees with the highest commission_pct in each department.
+
+3. Find the employee_id, last_name, email, commission_pct and department_id of all the employees with the lowest commission_pct in each department.
+
+4. Find the employee_id, last_name, email, commission_pct and department_id of all the employees in department ABCXYZ (department id = 5) who have a higher commission_pct than any of the employees of department XYZABC (department id = 7) .
+
+5. Find the employee_id, last_name, email, salary and department_id of all the employees in department ABCXYZ (department id = 5)  who have a higher salary than any of the employees of department XYZABC (department id = 7) .
+
+6. For each of the departments, find the department_id, job_id and salary with salary less than at least one other job_id in the department.
+
+7. Find the manager_id for who have at least one employee under them with a salary less than 2500.
+
+8. Find the manager_id for who have at least one employee under them with a commission_pct less than 18.25.
+
+9. Find the manager_id for who does not have any employee under them with a salary less than 3500.
+
+10. Find the manager_id for who does not have any employee under them with a commission_pct less than 45.05.

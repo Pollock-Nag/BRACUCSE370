@@ -1,0 +1,39 @@
+1.select employee_id, last_name, email, salary,department_id from employees
+    -> where (department_id, salary) in (select department_id, max(salary) from employees group by department_id);
+
+2.select employee_id, last_name, email, commission_pct ,department_id from employees
+    -> where (department_id, commission_pct ) in (select department_id, max(commission_pct ) from employees group by department_id);
+
+3.select employee_id, last_name, email, commission_pct ,department_id from employees
+    -> where (department_id, commission_pct ) in (select department_id, min(commission_pct ) from employees group by department_id);
+
+4.select employee_id, last_name, email, commission_pct, department_id from employees where department_id=110  and commission_pct> any(select commission_pct from employees where department_id=250);
+
+5.select employee_id, last_name, email, commission_pct, department_id from employees where department_id=110 and salary> any(select salary from employees where department_id=12);
+
+6.select department_id, job_id, salary from employees where salary< any(select job_id from employees group by department_id);
+
+7.select manager_id from employees where salary<2500 group by department_id;
+OR 
+7.select DISTINCT manager_id
+    -> from employees E1
+    -> WHERE EXISTS
+    -> (select* from employees E2 WHERE E1.manager_id = E2.manager_id AND E2.salary<2500);
+
+
+8.select manager_id from employees where commission_pct<18.25 group by department_id;
+OR 
+8. select DISTINCT manager_id
+     -> from employees E1
+     -> WHERE EXISTS
+     -> (select* from employees E2 WHERE E1.manager_id = E2.manager_id AND E2.commission_pct<18.25);
+
+9. select DISTINCT manager_id
+    -> from employees E1
+    -> WHERE NOT EXISTS
+    -> (select* from employees E2 WHERE E1.manager_id = E2.manager_id AND E2.salary<3500);
+
+10. select DISTINCT manager_id
+    -> from employees E1
+    -> WHERE NOT EXISTS
+    -> (select* from employees E2 WHERE E1.manager_id = E2.manager_id AND E2.commission_pct<45.05);

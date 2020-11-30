@@ -1,0 +1,14 @@
+insert into users values (
+'8','Adrian Holovaty','adrian@djangoproject.com',570724,'2020-05-07',5),
+('9','Simon Willison','simon@djangoproject.com',864615,'2020-04-30',4),
+('10','James Gosling','james@java.com',719491,'2020-05-18',5),
+('11','Rod Johnson','rod@spring.io',601744,'2020-05-18',7),
+('12','Satoshi Nakamoto','nakamoto@blockchain.com',630488,'2020-05-10',10);
+
+
+
+1. MariaDB [hw_google]> ALTER TABLE users CHANGE id member_id char(2);
+2. MariaDB [hw_google]> SELECT member_id, name, member_since FROM users;
+3. MariaDB [hw_google]> SELECT name, email , influence_count FROM users;	
+4. MariaDB [hw_google]> SELECT name, email, member_since, (10000000 -( miltiplier *influence_count /100)) FROM users;
+5. MariaDB [hw_google]> SELECT name, email, member_since, (10000000 -( miltiplier *influence_count /100)) AS ranking FROM users;

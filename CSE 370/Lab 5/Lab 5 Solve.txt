@@ -1,0 +1,66 @@
+1.SELECT customer_name,customer_city FROM ((customer INNER JOIN borrower ON borrower.customer_id = customer.customer_id) INNER JOIN loan ON loan.loan_number = borrower.loan_number)WHERE branch_name='Perryridge';
+
+1.SELECT customer_name, customer_city
+FROM ((customer
+INNER JOIN borrower ON 
+borrower.customer_id = customer.customer_id) 
+Inner Join loan ON 
+loan.loan_number = borrower.loan_number)
+WHERE branch_name = 'Perryridge';
+
+2.select distinct T.branch_name
+from branch T, branch S
+where T.assets > S.assets and
+S.branch_city = 'Brooklyn';
+
+3.select distinct T.branch_name
+from branch T where T.assets>all(Select S.assets from branch S where S.branch_city = 'Horseneck');
+
+4.select * FROM loan
+order by amount desc, loan_number asc;
+
+5.select branch_name, avg(balance)
+from account
+group by branch_name
+having avg(balance) >= 700;
+
+
+6. select c.customer_name, a.account_number, a.balance
+     from(customer c inner join depositor d on c.customer_id=d.customer_id)
+     inner join account a on a.account_number = d.account_number
+     Order BY a.balance desc limit 3;
+
+7.select customer_name
+from customer C, depositor D, account A
+where C.customer_id = D.customer_id and
+D.account_number = A.account_number and
+branch_name in(select branch_name
+from account A, depositor D, customer C
+where A.account_number = D.account_number and 
+D.customer_id = C.customer_id
+and customer_name = 'Johnson')
+and customer_name != 'Johnson';
+
+
+8.select c.customer_name
+from(customer c inner join depositor d on
+c.customer_id=d.customer_id) inner join account
+a on a.account_number = d.account_number where 
+a.branch_name='Mianus' AND c.customer_name NOT IN(select
+c1.customer_name from(customer c1 inner join borrower b1
+on c1.customer_id=b1.customer_id)inner join loan l1 on 
+l1.loan_number=b1.loan_number WHERE l1.branch_name='Mianus');
+
+
+
+9.select branch_name, count(distinct account.account_number)
+from depositor, account, customer
+where depositor.customer_id = customer.customer_id and
+depositor.account_number = account.account_number 
+group by branch_name
+having count(distinct account.account_number) >= 1;
+
+
+
+10 select b.branch_city,AVG(a.balance) AS AVG_BAL_0F_THIS_BRANCH,COUNT(a.account_number) from (depositor d inner join account a on d.account_number = a.account_number)
+inner join branch b on b.branch_name=a.branch_name GROUP BY b.branch_city HAVING COUNT(a.account_number)>=2 AND  b.branch_city='Palo Alto';

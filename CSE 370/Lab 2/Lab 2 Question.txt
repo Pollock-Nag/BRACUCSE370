@@ -1,0 +1,5 @@
+Change the column name "id" to "member_id"
+Find the member_id, name and member_since of all the users
+Find the name, email and influence_count of all the users
+Find the name, email and member_since of and ranking of all the members, where the formula for the ranking is as follow: 10000000 - (multiplier * influence / 100)
+Altering the previous command, show the ranking using ranking as the alias
